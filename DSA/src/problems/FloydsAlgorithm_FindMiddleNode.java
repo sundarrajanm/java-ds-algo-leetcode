@@ -4,7 +4,7 @@ import datastructures.LinkedList;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-public class FloydsAlgorithm {
+public class FloydsAlgorithm_FindMiddleNode {
     private static LinkedList createListWith(int... values) {
         LinkedList list = new LinkedList(10);
         for(int v: values) {

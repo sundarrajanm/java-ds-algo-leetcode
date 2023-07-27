@@ -67,6 +67,15 @@ public class LinkedList {
         System.out.println("Length: " + length);
     }
 
+    public Node get(int index) {
+        if (index < 0 || index >= length) return null;
+        Node temp = head;
+        for(int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+        return temp;
+    }
+
     // Using Floyd's Tortoise and Hare algorithm
     public Node findMiddleNode() {
 
