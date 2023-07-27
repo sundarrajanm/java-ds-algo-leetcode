@@ -76,6 +76,29 @@ public class LinkedList {
         return temp;
     }
 
+    @Override
+    public String toString() {
+        if(head == null) return "[]";
+
+        if(head == tail) return "[ " + this.head.value + " ]";
+
+        if(this.hasLoop()) return "[ has loop ]";
+
+        StringBuilder r = new StringBuilder("[ ");
+        Node ptr = this.head;
+        while(ptr != null) {
+            r.append(ptr.value);
+            ptr = ptr.next;
+
+            if(ptr == null) {
+                r.append(" ]");
+            } else {
+                r.append(" -> ");
+            }
+        }
+        return r.toString();
+    }
+
     // Using Floyd's Tortoise and Hare algorithm
     public Node findMiddleNode() {
 
@@ -114,6 +137,45 @@ public class LinkedList {
     }
 
     public Node findKthFromEnd(int k) {
-        return null;
+        Node firstPtr = this.head;
+
+        int i = k;
+        while(i > 0) {
+            firstPtr = firstPtr.next;
+            if(firstPtr == null) break;
+            i--;
+        }
+
+        if(firstPtr == null) return null;
+
+        Node secondPtr = this.head;
+
+        while(firstPtr != null) {
+            firstPtr = firstPtr.next;
+            secondPtr = secondPtr.next;
+        }
+
+        return secondPtr;
+    }
+
+    public void reverseBetween(int m, int n) {
+        if(this.head == null) return;
+
+        Node dummy = new Node(0);
+        dummy.next = this.head;
+        Node prev = dummy;
+
+        for(int i=0; i<m; i++) {
+            prev = prev.next;
+        }
+
+        Node current = prev.next;
+        for(int i = (n-m); i > 0; i--) {
+            Node temp = current.next;
+            current.next = temp.next;
+            temp.next = prev.next;
+            prev.next = temp;
+        }
+        this.head = dummy.next;
     }
 }
